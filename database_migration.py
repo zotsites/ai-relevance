@@ -29,7 +29,7 @@ try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
     db = client["cluster0"]
-    collection = db['websites_json']
+    collection = db['websites_json_backup']
     print(type(rows[1]))
     if isinstance(rows, list):
         collection.insert_many(rows)
