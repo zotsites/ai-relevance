@@ -18,8 +18,8 @@ client = OpenAI(
 #set up mongodb database collection to iterate through
 
 uri = "mongodb+srv://snipeAdmin:" + read_password(".mongo_password") + "@cluster0.jgcudmg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-client = MongoClient(uri, server_api=ServerApi('1'))
-db = client["cluster0"]
+db_client = MongoClient(uri, server_api=ServerApi('1'))
+db = db_client["cluster0"]
 websites_backup = db['websites_json_backup']
 relevant = db['relevant']
 non_relevant = db['non_relevant']
@@ -28,7 +28,7 @@ all_docs = websites_backup.find()
 #for loop to sort the documents into relevant and non-relevant
 
 
-for doc in random_docs:
+for doc in all_docs:
     response = client.chat.completions.create(
         model="gpt-4o", # model = "relevance".
         messages=[
