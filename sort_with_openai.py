@@ -36,11 +36,12 @@ for doc in random_docs:
             {"role": "user", "content": doc.get('url')},  
         ]
     )
-
+    
     if 'yes' in response.choices[0].message.content.lower():
         relevant.insert_one(doc)
+        print(doc.get('url') + ": Yes")
     else:
         non_relevant.insert_one(doc)
+        print(doc.get('url') + ": No")
 
 
-        
